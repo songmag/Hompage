@@ -4,8 +4,7 @@ import org.springframework.stereotype.Component;
 
 public final class StringUtil{
     public static boolean isBlank(String value){
-        if(value == null || "".equals(value))return true;
-        return false;
+        return value == null || "".equals(value);
     }
     public static String null2String(final String value,final String value2)
     {

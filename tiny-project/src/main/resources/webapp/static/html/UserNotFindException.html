@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserNotFindException</title>
+    <!-- <link href="/css/UserNotFindException.css" type="text/css"> -->
+</head>
+<style>
+    body {
+        height : 500px;
+    }
+    .center {
+        width: 500px;
+        margin: auto;
+        text-align :center;
+        position:relative;
+        top:50%;
+        height:100px;
+        margin-top:-50px;
+    }
+    .center .contents {
+        position:relative;
+        margin : 2em auto;
+    }
+    .btn{
+        width : 200px;
+        height : 100px;
+        border-style :double;
+        border-color : black;
+        border-width : 4px;
+        border-radius: 4px;
+        text-decoration: none;
+        padding : 15px;
+        color : black;
+    }
+    .btn:hover{
+        color : red;
+        background-color : pink;
+    }
+</style>
+<body>
+    <div class="center">
+        <div class="contents">
+            <a href="login_view.html"><img src="" width="350" height="150"></a>
+        </div>
+        <div class="contents">
+            <span>유저 : </span><span>USER_ID</span><span> 가입되어 있지 않습니다.</span>
+        </div>
+        <div class="contents">
+            <a href="/login_view.html" class="btn">로그인 화면으로</a>
+        </div>
+    </div>
+</body>
+</html>

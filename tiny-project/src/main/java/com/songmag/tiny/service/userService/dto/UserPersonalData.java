@@ -8,9 +8,10 @@ import org.springframework.context.annotation.Bean;
 @Getter
 @Setter
 @Builder
+@ToString
 public class UserPersonalData {
     private String name;
-    private String email;
     private String phoneNumber;
-    private String location;
+    private String address;
+    private String addressNum;
 }

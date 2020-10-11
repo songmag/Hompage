@@ -45,6 +45,7 @@ public class ViewController {
         if(StringUtil.isBlank(service.getUserView(value))){
             return "error.html";
         }
+
         return service.getUserView("main");
     }
 }
