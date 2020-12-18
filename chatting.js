@@ -1,4 +1,3 @@
-
 const option = {
     port: 9999,
 }
@@ -18,7 +17,6 @@ const http2 = require('http').createServer((req,res)=>{
         chat_server = 'localhost:9999/';
     }
     let socket = '<script>var socket = io.connect("ws://'+chat_server+'",{credentials : true,reconnection : true,path :"/chat" } );</script>'
-    console.log(socket);
     res.writeHead(200,healthHeader);
     res.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>');
     res.write(socket);
@@ -28,7 +26,7 @@ http2.listen(9898);
 http.listen(option.port);
 const chat_opt= {
     cors : {
-        origin : 'http://localhost:9898',
+        origins : ['http://localhost:9898','http://face-trip.com:9898'],
         methods : ['GET','POST'],
         credentials : true,
     },
