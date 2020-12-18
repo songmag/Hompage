@@ -13,9 +13,15 @@ const http = require('http').createServer((req,res)=>{
     res.end('http1 번에 접속'+JSON.stringify(req.method));
 });
 const http2 = require('http').createServer((req,res)=>{
+    let chat_server = 'face-trip.com:9999/';
+    if(req.headers.host.indexOf('localhost')> -1){
+        chat_server = 'localhost:9999/';
+    }
+    let socket = '<script>var socket = io.connect("ws://'+chat_server+'",{credentials : true,reconnection : true,path :"/chat" } );</script>'
+    console.log(socket);
     res.writeHead(200,healthHeader);
     res.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>');
-    res.write('<script>var socket = io.connect("ws://localhost:9999/",{credentials : true,reconnection : true,path :"/chat" } );</script>');
+    res.write(socket);
     res.end('http2 번에 접속');
 });
 http2.listen(9898);
