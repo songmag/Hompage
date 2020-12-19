@@ -3,6 +3,7 @@ const http = require('http').createServer((req,res)=>{
     res.writeHead(200,chat_config.server_option.healthHeader);
     res.end('http1 번에 접속'+JSON.stringify(req.method));
 });
+
 const http2 = require('http').createServer((req,res)=>{
     let chat_server = 'face-trip.com:9999/';
     if(req.headers.host.indexOf('localhost')> -1){
@@ -14,14 +15,13 @@ const http2 = require('http').createServer((req,res)=>{
     res.write(socket);
     res.end('http2 번에 접속');
 });
+
+
 http2.listen(9898);
 http.listen(chat_config.server_option.port);
 const io = require('socket.io');
 const socketIo = io(http,chat_config.chat_option);
 socketIo.on('connection',(socket)=>{
-    socket.on('customEvent', function(data){
-        console.log(data);
-    })
 });
 
 

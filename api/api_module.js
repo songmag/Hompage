@@ -1,27 +1,15 @@
-const chat_socket_list = [];
-class chat_api{
-    #socket;
-    #roomSrno = [];
-    constructor(socket) {
-        this.#socket  = socket;
-        chat_socket_list.push(this);
-    }
-    connect(userid){
-        //userID 를 통해서 room chat rsno 를 가져온다.
-    }
-    havingRoomSrno(msg){
-        let rs = false;
-        if(msg.roomSrno){
-            for(let i = 0 ; i < this.#roomSrno ; i++){
-                if(this.#roomSrno[i] == msg.roomSrno){
-                    rs = true;
-                    break;
-                }
-            }
-            return rs;
+module.exports.functions = {
+    pre_connect : (socket, user_infm)=>{
+
+    },
+    connect : (socket,room_no,user_id)=>{
+        let msg= {
+            user_id : user_id,
+            msg : 'connect'
         }
-    }
-    sendMessage(msg){
-        this.#socket.send(msg);
+        socket.to(room_no).emit(msg);
+    },
+    sendMessage : (socket, room_no,msg)=>{
+        socket.to(room_no).emit(msg);
     }
 }
