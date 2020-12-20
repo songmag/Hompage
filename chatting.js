@@ -20,8 +20,12 @@ const http2 = require('http').createServer((req,res)=>{
 http2.listen(9898);
 http.listen(chat_config.server_option.port);
 const io = require('socket.io');
-const socketIo = io(http,chat_config.chat_option);
+const socketIo = io.of(http,chat_config.chat_option);
+socketIo.use((socket,next)=>{
+    next();
+});
 socketIo.on('connection',(socket)=>{
+
 });
 
 
