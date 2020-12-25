@@ -9,7 +9,7 @@ function pre_connection(user_infm){
         let user_id = user_infm.user_id;
         this.join(rooms);
         if(!(rooms instanceof Array)){
-            this.of(rooms).emit('read message',user_infm);
+            this.to(rooms).emit('read message',user_infm);
         }
     }
     catch{
@@ -17,9 +17,17 @@ function pre_connection(user_infm){
     }
 }
 //방에 메세지 전송
+/**
+ * 다른 네임스페이스에 값을 전달 할 수 있는 방법이 무엇인가?
+ * 네임 스페이스 값을 가지고 있는다?
+ * @param send_data
+ */
 function send_message(send_data){
     try{
-        this.of(send_data.rooms).emit('recive_message',send_data);
+        console.log(this.nsp);
+        var rsg = this._nsps.get('/chat_alarm');
+        console.log(rsg);
+        this.to(send_data.rooms).emit('receive_message',send_data);
     }
     catch{
         console.log('\n'+ send_data + " 에러 !! \n");
@@ -27,7 +35,7 @@ function send_message(send_data){
 }
 function join_room(send_data){
     try{
-        this.of(send_data.rooms).emit('join_room',send_data);
+        this.to(send_data.rooms).emit('join_room',send_data);
     }catch{
 
     }

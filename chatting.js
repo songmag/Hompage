@@ -11,9 +11,9 @@ const http2 = require('http').createServer((req,res)=>{
         res.end();
         return;
     }
-    let chat_server = 'face-trip.com:9999/';
+    let chat_server = 'face-trip.com:9999';
     if(req.headers.host.indexOf('localhost')> -1){
-        chat_server = 'localhost:9999/';
+        chat_server = 'localhost:9999';
     }
     if(req.url){
        fs.readFile('./html'+req.url,'UTF-8',function(err,file){
