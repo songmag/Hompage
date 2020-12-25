@@ -11,8 +11,10 @@ import java.net.URI;
 @Configuration
 public class ConfigurationClass  {
 
+    public static Gson gson = new Gson();
+
     @Bean
-    public Gson getGson(){
+    public static Gson getGson(){
         return new Gson();
     }
     /*

@@ -27,4 +27,19 @@
             and id.admin=0
         </if>
     </select>
+    <insert id="addUserId" useGeneratedKeys="true" keyProperty="userKey" parameterType="com.songmag.tiny.service.userService.dto.UserAddDTO">
+        INSERT INTO USER_ID(EMAIL_ID,PASSWD,ADMIN)
+        <if test="admin">
+            SELECT #{userId},#{password},1 FROM DUAL
+        </if>
+        <if test="!admin">
+            SELECT #{userId},#{password},0 FROM DUAL
+        </if>
+        WHERE NOT EXISTS ( SELECT 1 FROM USER_ID
+        WHERE EMAIL_ID = #{userId})
+    </insert>
+    <insert id="addUserInfo" parameterType="com.songmag.tiny.service.userService.dto.UserAddDTO">
+        INSERT INTO USER_INFM(USER_KEY,NAME,PHONE,ADDRESS,ADDRESS_NUM)
+        VALUES(#{userKey},#{name},#{phoneNumber},#{address},#{addressNum})
+    </insert>
 </mapper>

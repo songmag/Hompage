@@ -6,6 +6,7 @@ import com.songmag.tiny.service.UserFactory;
 import com.songmag.tiny.service.exception.UserFindException;
 import com.songmag.tiny.service.userService.dto.UserAddDTO;
 import com.songmag.tiny.service.userService.dto.UserDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.IllegalFormatException;
@@ -27,8 +28,9 @@ public class GuestService extends ImplUserService {
     }
 
     @Override
+    @Transactional
     public void signUpUser(UserAddDTO dto) {
-
+        dto.setAdmin(true);
     }
 
     @Override

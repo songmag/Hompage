@@ -3,10 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.PrintWriter;
 
-public class UserFindException extends Throwable {
-
+public class UserFindException extends SongException{
     private String id;
-
     public UserFindException(String id){
         this.id = id;
     }

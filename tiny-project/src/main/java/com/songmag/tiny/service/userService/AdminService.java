@@ -1,9 +1,11 @@
 package com.songmag.tiny.service.userService;
 
 import com.songmag.tiny.service.UserFactory;
+import com.songmag.tiny.service.exception.TransactionalException;
 import com.songmag.tiny.service.exception.UserFindException;
 import com.songmag.tiny.service.userService.dto.UserAddDTO;
 import com.songmag.tiny.service.userService.dto.UserDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.IllegalFormatException;
@@ -12,6 +14,7 @@ import java.util.IllegalFormatException;
 public class AdminService extends ImplUserService{
 
     @Override
+    @Transactional(rollbackFor = TransactionalException.class)
     public void signUpUser(UserAddDTO dto) {
 
     }
