@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
+
+</head>
+<body>
+    <input type="text" name="id" id="user-id"/>
+    <input type="text" id="rooms"/>
+    <input type="button" id="pre-chat" value="방 접속"/>
+</body>
+
+<script>
+    var socket = io.connect("ws://CHAT_SERVER",{credentials : true,reconnection : true,path :"/node" } );
+    socket.of('/chat_view').on('recive_message',function(data){
+        console.log(data);
+    })
+    document.getElementById('pre-chat').onclick = function(){
+        var user_id = document.getElementById('user-id').value;
+        var rooms = document.getElementById('rooms').value;
+        var user_infm = {
+            user_id : user_id,
+            rooms : rooms
+        };
+        socket.of('/chat_view').emit('pre_connection',user_infm);
+    }
+
+</script>
+</html>

@@ -1,6 +1,8 @@
 module.exports.functions = socket => {
+    socket.on('pre_connection', pre_connection);
+    socket.on('send_message',send_message);
+    socket.on('join_room',join_room);
 }
-
 function pre_connection(user_infm){
     try {
         let rooms = user_infm.rooms;
@@ -17,16 +19,17 @@ function pre_connection(user_infm){
 //방에 메세지 전송
 function send_message(send_data){
     try{
-        this.of(send_data.rooms).emit('recive message',send_data);
+        this.of(send_data.rooms).emit('recive_message',send_data);
     }
     catch{
         console.log('\n'+ send_data + " 에러 !! \n");
     }
 }
-function join_room(data){
+function join_room(send_data){
     try{
-
+        this.of(send_data.rooms).emit('join_room',send_data);
     }catch{
 
     }
 }
+

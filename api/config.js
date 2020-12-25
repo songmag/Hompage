@@ -1,3 +1,9 @@
+let cors = {
+    origins : ['http://localhost:9898','http://face-trip.com:9898'],
+    methods : ['GET','POST'],
+    credentials : true,
+}
+
 module.exports.server_option = {
         port: 9999,
         healthHeader : {
@@ -8,10 +14,12 @@ module.exports.server_option = {
         }
     };
 module.exports.chat_option =  {
-        cors : {
-            origins : ['http://localhost:9898','http://face-trip.com:9898'],
-            methods : ['GET','POST'],
-            credentials : true,
-        },
-        path : '/chat'
-    };
+    name : '/chat_view'
+};
+module.exports.chat_alarm_option = {
+    name : '/chat_alarm'
+};
+module.exports.chat_server_option = {
+    cors : cors,
+    path : '/node'
+}
