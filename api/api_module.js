@@ -24,20 +24,19 @@ function pre_connection(user_infm){
  */
 function send_message(send_data){
     try{
-        console.log(this.nsp);
-        var rsg = this._nsps.get('/chat_alarm');
-        console.log(rsg);
+        this.server.of('/chat_view').to(send_data.rooms).emit('receive_message',send_data);
         this.to(send_data.rooms).emit('receive_message',send_data);
     }
     catch{
         console.log('\n'+ send_data + " 에러 !! \n");
     }
 }
+
 function join_room(send_data){
     try{
         this.to(send_data.rooms).emit('join_room',send_data);
     }catch{
-
+        console.log('\n 방 참여 에러');
     }
 }
 
