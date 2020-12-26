@@ -1,17 +1,19 @@
 package com.songmag.tiny.service.userService.dto;
 
 import lombok.*;
-import org.springframework.context.annotation.Bean;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Builder
 @ToString
-public class UserPersonalData {
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserAddDTO {
+    private long userKey;
+    private String userId;
+    private String password;
     private String name;
     private String phoneNumber;
     private String address;
     private String addressNum;
+    private boolean admin;
 }

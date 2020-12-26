@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.songmag.tiny.Repository.dao.UserDAO"><!--namespace를 통해 UserDAO와 연결합니다. -->
+    <resultMap id="userSession" type="com.songmag.tiny.service.userService.dto.UserSession">
+        <result property="emailId" column="email_id"/>
+        <result property="registDate" column="regist_date"/>
+        <association property="data" javaType="com.songmag.tiny.service.userService.dto.UserPersonalData">
+            <result property="name" column="name"/>
+            <result property="phoneNumber" column="phone"/>
+            <result property="address" column="address"/>
+            <result property="addressNum" column="address_num"/>
+        </association>
+    </resultMap>
+    <select id="authUser"
+            parameterType="com.songmag.tiny.service.userService.dto.UserDTO"
+            resultMap="userSession">
+        SELECT * from USER_ID as id,USER_INFM as infm
+        WHERE id.user_key = infm.user_key
+        and id.email_id = #{userId}
+        and id.passwd = #{userPwd}
+        <if test="admin">
+            and id.admin=1
+        </if>
+        <if test="!admin">
+            and id.admin=0
+        </if>
+    </select>
+    <insert id="addUserId" useGeneratedKeys="true" keyProperty="userKey" parameterType="com.songmag.tiny.service.userService.dto.UserAddDTO">
+        INSERT INTO USER_ID(EMAIL_ID,PASSWD,ADMIN)
+        <if test="admin">
+            SELECT #{userId},#{password},1 FROM DUAL
+        </if>
+        <if test="!admin">
+            SELECT #{userId},#{password},0 FROM DUAL
+        </if>
+        WHERE NOT EXISTS ( SELECT 1 FROM USER_ID
+        WHERE EMAIL_ID = #{userId})
+    </insert>
+    <insert id="addUserInfo" parameterType="com.songmag.tiny.service.userService.dto.UserAddDTO">
+        INSERT INTO USER_INFM(USER_KEY,NAME,PHONE,ADDRESS,ADDRESS_NUM)
+        VALUES(#{userKey},#{name},#{phoneNumber},#{address},#{addressNum})
+    </insert>
+</mapper>

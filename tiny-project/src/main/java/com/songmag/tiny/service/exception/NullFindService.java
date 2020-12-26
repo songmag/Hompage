@@ -6,9 +6,10 @@ import org.slf4j.LoggerFactory;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-public class NullFindService extends Throwable{
+public class NullFindService extends SongException{
     private String message;
     private String className;
+
     private Logger logger = LoggerFactory.getLogger(NullFindService.class);
     public NullFindService(String message, String className){
             this.message = message;

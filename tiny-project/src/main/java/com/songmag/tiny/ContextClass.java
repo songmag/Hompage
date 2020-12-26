@@ -10,6 +10,6 @@ public class ContextClass implements ApplicationContextAware {
     public static ApplicationContext context;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
+        context = applicationContext;
     }
 }

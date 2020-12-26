@@ -1,0 +1,5 @@
+.center { width: 200px; margin: 0 auto; }
+.center .contents {
+    position:relative;
+    margin : 0 auto;
+}
