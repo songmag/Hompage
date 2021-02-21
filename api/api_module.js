@@ -3,6 +3,7 @@ module.exports.functions = socket => {
     socket.on('send_message',send_message);
     socket.on('join_room',join_room);
 }
+
 function pre_connection(user_infm){
     try {
         let rooms = user_infm.rooms;
@@ -16,6 +17,7 @@ function pre_connection(user_infm){
         console.log(user_infm + " 에러 :: \n");
     }
 }
+
 //방에 메세지 전송
 /**
  * 다른 네임스페이스에 값을 전달 할 수 있는 방법이 무엇인가?
