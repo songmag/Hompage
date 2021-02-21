@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    user -> join chat -> chat room -> chat_message
+    join_room = email_id, room_number
+    chat = room_number, room_name, room_count,
+    chat_message = chat_number,room_number,email_id,chat_message,type=> text or img or video or file?
+    read_message = chat_number,read_email_id
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.songmag.tiny.Repository.dao.ChatDAO">
+    <resultMap id="ChatRoomVO" type="com.songmag.tiny.Repository.vo.ChatMessageVO">
+        <collection property="rooms" column="room" javaType="java.util.ArrayList" />
+    </resultMap>
+    <select id="getRooms" parameterType="com.songmag.tiny.Repository.dto.ChatRoomDTO" resultMap="ChatRoomVO">
+        SELECT ROOMS FROM CHAT_ROOMS
+        WHERE USER_ID = #{userId}
+
+    </select>
+</mapper>
+
+

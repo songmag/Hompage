@@ -1,6 +1,5 @@
-package com.songmag.tinyproject;
+package com.songmag.tiny;
 
-import com.songmag.tiny.TinyProjectApplication;
 import com.songmag.tiny.Repository.dao.UserDAO;
 import com.songmag.tiny.service.google.GoogleToken;
 import com.songmag.tiny.service.google.OauthGoogle;
@@ -12,12 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -73,6 +69,7 @@ class TinyProjectApplicationTests {
 	}
 	 */
 
+	/*
 	@Test
 	void jwtRSTest() throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
 		KeyUtil.KeyUtilBuilder builder = KeyUtil.getBuilder();
@@ -107,4 +104,6 @@ class TinyProjectApplicationTests {
 		String rest = template.getForObject("https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token="+gtocken.getAccess_token(),String.class,entity2);
 		System.out.println(rest);
 	}
+	*/
+
 }

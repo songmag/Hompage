@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅 리스트</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="chat-list">
+    </div>
+</body>
+<script>
+    var user_infm;
+    var socket = io.connect("ws://CHAT_SERVER/chat_alarm",{credentials : true,reconnection : true,path :"/node" } );
+    socket.on('receive_message',function(data){
+
+    })
+    socket.on('receive_message',function(data){
+        var message = data.user_id+"::"+data.msg;
+        var message_box = document.createElement('p');
+        message_box.innerHTML = message;
+        document.getElementById('message-box').appendChild(message_box);
+        console.log(data.msg);
+    });
+    socket.on('read message',function(data){
+        console.log(data.user_id+ "가 이 방 것 읽었어");
+    });
+    document.getElementById('pre-chat').onclick = function(){
+        if(!user_infm) {
+            var user_id = document.getElementById('user-id').value;
+            var rooms = document.getElementById('rooms').value;
+            user_infm = {
+                user_id: user_id,
+                rooms: rooms
+            };
+            document.getElementById('now-user-id').innerText = user_id;
+            document.getElementById('now-rooms').innerText = rooms;
+        }
+        socket.emit('pre_connection',user_infm);
+    };
+    document.getElementById('send-btn').onclick = function(){
+        var data = user_infm;
+        var message = document.getElementById('message').value;
+        document.getElementById('message').value='';
+        data.msg = message;
+        document.getElementById('message-box').appendChild(makeMessageBox(data,data.msg));
+        socket.emit('send_message',data);
+    }
+    function makeMessageBox(user,message){
+        var msg = user.user_id + '::' + message;
+        var ptag = document.createElement('p');
+        ptag.innerHTML=msg;
+        return ptag;
+    }
+</script>

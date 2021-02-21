@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.songmag.tiny.service.UserServiceFactory;
 import com.songmag.tiny.service.exception.NullFindService;
 import com.songmag.tiny.service.exception.UserFindException;
+import com.songmag.tiny.service.userService.dto.AccessDTO;
 import com.songmag.tiny.service.userService.dto.UserAddDTO;
 import com.songmag.tiny.service.userService.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,12 @@ import java.io.Writer;
 @Controller
 public class UserController {
     @Autowired
-    UserServiceFactory factory;
+    private UserServiceFactory factory;
     @Autowired
-    Gson gson;
+    private Gson gson;
 
     @ResponseBody
-    @RequestMapping(value = "/signIn/{value}", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/signin/{value}", method = {RequestMethod.POST,RequestMethod.GET})
     public ResponseEntity<String> login(@RequestBody UserDTO dto, @PathVariable String value, OutputStream writer, HttpSession session) throws IOException {
         try {
             if(factory.service(value).login(dto,session)){
@@ -45,13 +46,17 @@ public class UserController {
         return new ResponseEntity(value+" Login Error",HttpStatus.BAD_REQUEST);
     }
 
-
-
     @ResponseBody
-    @RequestMapping(value = "/signIn/google/login")
+    @RequestMapping(value = "/signin/google/login")
     public ResponseEntity<String> login(@RequestBody String values)
     {
         return new ResponseEntity(values + "Login Finish" , HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @RequestMapping(value= "/signup/{value}")
+    public ResponseEntity<String> signUp(@RequestBody AccessDTO dto,HttpSession session){
+        return null;
     }
 
     @ResponseBody

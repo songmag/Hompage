@@ -9,12 +9,12 @@ import java.util.Map;
 
 @Component
 public class UserServiceContainer{
-
     Map<String, Object> userServices;
     private UserServiceContainer(){}
-
     @PostConstruct
     public void init(){
-        userServices = ContextClass.context.getBeansWithAnnotation(UserFactory.class);
+        userServices = ContextClass.context
+                .getBeansWithAnnotation(UserFactory.class);
     }
+
 }

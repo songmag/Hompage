@@ -1,2 +1,8 @@
-package com.songmag.tiny.Repository;public class JwtRepository {
+package com.songmag.tiny.Repository;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class JwtRepository {
+
 }

@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class DatabaseConfigure {
-
     @Autowired
     SqlSessionFactory factory;
     @Bean
@@ -29,7 +28,6 @@ public class DatabaseConfigure {
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*Mapper.xml");
-        
         sessionFactoryBean.setMapperLocations(res);
         return sessionFactoryBean.getObject();
     }

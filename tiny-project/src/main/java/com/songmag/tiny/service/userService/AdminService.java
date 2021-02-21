@@ -1,10 +1,12 @@
 package com.songmag.tiny.service.userService;
 
+import com.songmag.tiny.Repository.UserRepository;
 import com.songmag.tiny.service.UserFactory;
 import com.songmag.tiny.service.exception.TransactionalException;
 import com.songmag.tiny.service.exception.UserFindException;
 import com.songmag.tiny.service.userService.dto.UserAddDTO;
 import com.songmag.tiny.service.userService.dto.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
@@ -14,9 +16,9 @@ import java.util.IllegalFormatException;
 public class AdminService extends ImplUserService{
 
     @Override
-    @Transactional(rollbackFor = TransactionalException.class)
     public void signUpUser(UserAddDTO dto) {
-
+        dto.setAdmin(true);
+        super.signUpUser(dto);
     }
 
     @Override
@@ -33,6 +35,7 @@ public class AdminService extends ImplUserService{
         session.setAttribute("USER_SESSION",userRepository.authUser(dto));
         return true;
     }
+
     @Override
     public boolean login(String userId, String userPwd, HttpSession session) throws IllegalFormatException, UserFindException {
         UserDTO dto = new UserDTO(userId,userPwd,true);

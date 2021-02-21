@@ -14,7 +14,6 @@ import java.util.Optional;
 public class UserRepositoryImpl implements UserRepository{
     @Autowired
     UserDAO userDAO;
-
     @Override
     public UserSession authUser(UserDTO dto) throws UserFindException {
         Optional<UserSession> userSession = null;
